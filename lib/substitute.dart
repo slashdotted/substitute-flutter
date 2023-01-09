@@ -1,4 +1,4 @@
-/// There is only one classe in this library: *Substitute*.
+/// There is only one class in this library: *Substitute*.
 /// You can create a substitution by either specifying the find pattern and the replacement or by
 /// using a sed expression which uses the 's' (substitute) command. The *apply* method is used to
 /// perform the substitution in a string (the resulting string will be returned). Please refer to
