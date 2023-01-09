@@ -1,6 +1,8 @@
 name: substitute
-description: Substitute like sed.
-version: 0.0.3
+description: >-
+  A package that implements a substitute function (like the one provided by the Unix command line tool sed).
+  It enables easy string manipulation with a support for back-references (groups or whole match).
+version: 0.0.4
 homepage: https://github.com/slashdotted/substitute-flutter
 
 environment:

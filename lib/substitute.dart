@@ -36,8 +36,10 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 import 'package:flutter/foundation.dart';
 
+/// Token types for the replacement list
 enum _TokenType { backRef, text }
 
+/// This private class represents a token in the replacement list
 class _Token {
   _TokenType type = _TokenType.text;
   String? text;
@@ -45,7 +47,8 @@ class _Token {
   _Token({required this.type, this.text, this.n});
 }
 
-/// This is the base class of the library.
+/// This is the base class of the library. It provides the *apply* method to peform
+/// a substitution
 class Substitute {
   static bool debug = false;
   late final RegExp _find;
@@ -53,6 +56,10 @@ class Substitute {
   late final bool global;
   late final bool caseInsensitive;
 
+  /// Constructs a substitution from a sed expression
+  /// The *expr* parameters has the form *s/find/replacement/Ig*, where
+  /// *I* is an optional flag that stands for *case insensitive*, and
+  /// *g* is an optional flag that stads for *global* (replacement)
   Substitute.fromSedExpr(String expr) {
     if (!expr.startsWith("s") || expr.length < 4) {
       throw 'Invalid sed substitute expression';
@@ -74,6 +81,12 @@ class Substitute {
     _replacement = _parseReplacement(params[1]);
   }
 
+  /// Constructs a substitution from a regular expression (the *find* parameter)
+  /// and a replacement. The replacement string can contain the special character
+  /// *&* which references the whole match, and back-references in the form
+  /// \N where N is an integer between 1 and 9 corresponding to a group in the pattern.
+  /// Additional options *global* and *caseInsensitive* are used to perform a substitution
+  /// in the whole string and with case insensitive behavior.
   Substitute(
       {required String find,
       required String replacement,
@@ -83,6 +96,7 @@ class Substitute {
     _replacement = _parseReplacement(replacement);
   }
 
+  /// Applies the substitution to an input string and returns the result.
   String apply(String input) {
     replacer(Match match) {
       var result = '';
@@ -115,6 +129,7 @@ class Substitute {
     return output;
   }
 
+  /// Parses the replacement string to process back-references
   List<_Token> _parseReplacement(String replacement) {
     List<_Token> tokens = [];
     bool escape = false;

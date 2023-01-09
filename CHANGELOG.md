@@ -9,3 +9,7 @@
 ## 0.0.3
 
 * Fix license
+
+## 0.0.4
+
+* Add example and improve documentation
