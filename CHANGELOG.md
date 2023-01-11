@@ -13,3 +13,7 @@
 ## 0.0.4
 
 * Add example and improve documentation
+
+## 0.0.5
+
+* Shorten pubspec description
