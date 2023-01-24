@@ -34,8 +34,6 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import 'package:flutter/foundation.dart';
-
 /// Token types for the replacement list
 enum _TokenType { backRef, text }
 
@@ -50,7 +48,6 @@ class _Token {
 /// This is the base class of the library. It provides the *apply* method to peform
 /// a substitution
 class Substitute {
-  static bool debug = false;
   late final RegExp _find;
   late final List<_Token> _replacement;
   late final bool global;
@@ -119,12 +116,6 @@ class Substitute {
     var output = global
         ? input.replaceAllMapped(_find, replacer)
         : input.replaceFirstMapped(_find, replacer);
-
-    if (debug) {
-      if (kDebugMode) {
-        print("After $_find.pattern => $output");
-      }
-    }
 
     return output;
   }

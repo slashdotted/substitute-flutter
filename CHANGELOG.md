@@ -17,3 +17,7 @@
 ## 0.0.5
 
 * Shorten pubspec description
+
+## 0.0.6
+
+* Remove Flutter dependency
